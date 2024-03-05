@@ -80,11 +80,11 @@ public final class World {
     }
 
     /** Returns the (optional) nearest world entity of the given kind(s) to the point.*/
-    public Optional<Entity> findNearest(Point position, List<Entity.EntityKind> kinds) {
+    public Optional<Entity> findNearest(Point position, List<Class<?>> kinds) {
         List<Entity> ofType = new LinkedList<>();
-        for (Entity.EntityKind kind : kinds) {
+        for (Class<?> kind : kinds) {
             for (Entity entity : this.entities) {
-                if (entity.getKind() == kind) {
+                if (kind == entity.getClass()) {
                     ofType.add(entity);
                 }
             }

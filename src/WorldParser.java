@@ -160,14 +160,14 @@ public class WorldParser {
 
             // Parse specific properties
             return switch (key) {
-                case Entity.DUDE_KEY -> parseDude(specificProperties, id, position, imageLibrary);
-                case Entity.FAIRY_KEY -> parseFairy(specificProperties, id, position, imageLibrary);
-                case Entity.HOUSE_KEY -> parseHouse(specificProperties, id, position, imageLibrary);
-                case Entity.MUSHROOM_KEY -> parseMushroom(specificProperties, id, position, imageLibrary);
-                case Entity.WATER_KEY -> parseWater(specificProperties, id, position, imageLibrary);
-                case Entity.SAPLING_KEY -> parseSapling(specificProperties, id, position, imageLibrary);
-                case Entity.STUMP_KEY -> parseStump(specificProperties, position, id, imageLibrary);
-                case Entity.TREE_KEY -> parseTree(specificProperties, id, position, imageLibrary);
+                case Dude.DUDE_KEY -> parseDude(specificProperties, id, position, imageLibrary);
+                case Fairy.FAIRY_KEY -> parseFairy(specificProperties, id, position, imageLibrary);
+                case House.HOUSE_KEY -> parseHouse(specificProperties, id, position, imageLibrary);
+                case Mushroom.MUSHROOM_KEY -> parseMushroom(specificProperties, id, position, imageLibrary);
+                case Water.WATER_KEY -> parseWater(specificProperties, id, position, imageLibrary);
+                case Sapling.SAPLING_KEY -> parseSapling(specificProperties, id, position, imageLibrary);
+                case Stump.STUMP_KEY -> parseStump(specificProperties, position, id, imageLibrary);
+                case Tree.TREE_KEY -> parseTree(specificProperties, id, position, imageLibrary);
                 default -> throw new IllegalArgumentException(String.format("Unexpected entity key: %s", key));
             };
         } else {
@@ -181,10 +181,10 @@ public class WorldParser {
 
             // Modify to use a constructor from your class hierarchy
             // Ensure the order of all passed arguments match the desired parameters
-            return Entity.createDude(
+            return new Dude(
                     id,
                     position,
-                    imageLibrary.get(Entity.DUDE_KEY),
+                    imageLibrary.get(Dude.DUDE_KEY),
                     Double.parseDouble(properties[Entity.DUDE_PARSE_PROPERTY_ANIMATION_PERIOD_INDEX]),
                     Double.parseDouble(properties[Entity.DUDE_PARSE_PROPERTY_BEHAVIOR_PERIOD_INDEX]),
                     0,
@@ -194,7 +194,7 @@ public class WorldParser {
         } else {
             throw new IllegalArgumentException(String.format(
                     "%s requires %d properties when parsing, got %d",
-                    Entity.DUDE_KEY,
+                    Dude.DUDE_KEY,
                     Entity.DUDE_PARSE_PROPERTY_COUNT,
                     properties.length
             ));
@@ -207,10 +207,10 @@ public class WorldParser {
 
             // Modify to use a constructor from your class hierarchy
             // Ensure the order of all passed arguments match the desired parameters
-            return Entity.createFairy(
+            return new Fairy(
                     id,
                     position,
-                    imageLibrary.get(Entity.FAIRY_KEY),
+                    imageLibrary.get(Fairy.FAIRY_KEY),
                     Double.parseDouble(properties[Entity.FAIRY_PARSE_PROPERTY_ANIMATION_PERIOD_INDEX]),
                     Double.parseDouble(properties[Entity.FAIRY_PARSE_PROPERTY_BEHAVIOR_PERIOD_INDEX])
             );
@@ -218,7 +218,7 @@ public class WorldParser {
         } else {
             throw new IllegalArgumentException(String.format(
                     "%s requires %d properties when parsing, got %d",
-                    Entity.FAIRY_KEY,
+                    Fairy.FAIRY_KEY,
                     Entity.FAIRY_PARSE_PROPERTY_COUNT,
                     properties.length
             ));
@@ -231,17 +231,17 @@ public class WorldParser {
 
             // Modify to use a constructor from your class hierarchy
             // Ensure the order of all passed arguments match the desired parameters
-            return Entity.createMushroom(
+            return new Mushroom(
                     id,
                     position,
-                    imageLibrary.get(Entity.MUSHROOM_KEY),
+                    imageLibrary.get(Mushroom.MUSHROOM_KEY),
                     Double.parseDouble(properties[Entity.MUSHROOM_PARSE_BEHAVIOR_PERIOD_INDEX])
             );
 
         } else {
             throw new IllegalArgumentException(String.format(
                     "%s requires %d properties when parsing, got %d",
-                    Entity.MUSHROOM_KEY,
+                    Mushroom.MUSHROOM_KEY,
                     Entity.MUSHROOM_PARSE_PROPERTY_COUNT,
                     properties.length
             ));
@@ -254,16 +254,16 @@ public class WorldParser {
 
             // Modify to use a constructor from your class hierarchy
             // Ensure the order of all passed arguments match the desired parameters
-            return Entity.createHouse(
+            return new House(
                     id,
                     position,
-                    imageLibrary.get(Entity.HOUSE_KEY)
+                    imageLibrary.get(House.HOUSE_KEY)
             );
 
         } else {
             throw new IllegalArgumentException(String.format(
                     "%s requires %d properties when parsing, got %d",
-                    Entity.HOUSE_KEY,
+                    House.HOUSE_KEY,
                     Entity.HOUSE_PARSE_PROPERTY_COUNT,
                     properties.length
             ));
@@ -275,16 +275,16 @@ public class WorldParser {
 
             // Modify this to use a constructor from your class hierarchy
             // Ensure the order of all passed arguments match the desired parameters
-            return Entity.createSapling(
+            return new Sapling(
                     id,
                     position,
-                    imageLibrary.get(Entity.SAPLING_KEY)
+                    imageLibrary.get(Sapling.SAPLING_KEY)
             );
 
         } else {
             throw new IllegalArgumentException(String.format(
                     "%s requires %d properties when parsing, got %d",
-                    Entity.SAPLING_KEY,
+                    Sapling.SAPLING_KEY,
                     Entity.SAPLING_PARSE_PROPERTY_COUNT,
                     properties.length
             ));
@@ -296,16 +296,16 @@ public class WorldParser {
 
             // Modify this to use a constructor from your class hierarchy
             // Ensure the order of all passed arguments match the desired parameters
-            return Entity.createStump(
+            return new Stump(
                     id,
                     pt,
-                    imageLibrary.get(Entity.STUMP_KEY)
+                    imageLibrary.get(Stump.STUMP_KEY)
             );
 
         } else {
             throw new IllegalArgumentException(String.format(
                     "%s requires %d properties when parsing, got %d",
-                    Entity.STUMP_KEY,
+                    Stump.STUMP_KEY,
                     Entity.STUMP_PARSE_PROPERTY_COUNT,
                     properties.length
             ));
@@ -317,10 +317,10 @@ public class WorldParser {
 
             // Modify to use a constructor from your class hierarchy
             // Ensure the order of all passed arguments match the desired parameters
-            return Entity.createTree(
+            return new Tree(
                     id,
                     position,
-                    imageLibrary.get(Entity.TREE_KEY),
+                    imageLibrary.get(Tree.TREE_KEY),
                     Double.parseDouble(properties[Entity.TREE_PARSE_PROPERTY_ANIMATION_PERIOD_INDEX]),
                     Double.parseDouble(properties[Entity.TREE_PARSE_PROPERTY_BEHAVIOR_PERIOD_INDEX]),
                     Integer.parseInt(properties[Entity.TREE_PARSE_PROPERTY_HEALTH_INDEX])
@@ -329,7 +329,7 @@ public class WorldParser {
         } else {
             throw new IllegalArgumentException(String.format(
                     "%s requires %d properties when parsing, got %d",
-                    Entity.TREE_KEY,
+                    Tree.TREE_KEY,
                     Entity.TREE_PARSE_PROPERTY_COUNT,
                     properties.length
             ));
@@ -341,16 +341,16 @@ public class WorldParser {
 
             // Modify to use a constructor from your class hierarchy
             // Ensure the order of all passed arguments match the desired parameters
-            return Entity.createWater(
+            return new Water(
                     id,
                     position,
-                    imageLibrary.get(Entity.WATER_KEY)
+                    imageLibrary.get(Water.WATER_KEY)
             );
 
         } else {
             throw new IllegalArgumentException(String.format(
                     "%s requires %d properties when parsing, got %d",
-                    Entity.WATER_KEY,
+                    Water.WATER_KEY,
                     Entity.WATER_PARSE_PROPERTY_COUNT,
                     properties.length
             ));
